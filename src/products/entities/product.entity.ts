@@ -1,5 +1,6 @@
 
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, RelationId } from 'typeorm';
+import { Category } from '../../categories/entities/category.entity';
 
 @Entity()
 export class Product {
@@ -9,8 +10,12 @@ export class Product {
   @Column()
   "name": string;
 
-  @Column()
-  "category": string;
+  @ManyToOne(() => Category, { nullable: false, onDelete: 'RESTRICT' })
+  @JoinColumn({ name: 'category_id' })
+  "category": Category;
+
+  @RelationId((product: Product) => product.category)
+  "category_id": number;
 
   @Column('int')
   "price": number;

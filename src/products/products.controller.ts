@@ -26,14 +26,14 @@ export class ProductsController {
   }
 
   @Put(':id')
-  @HttpCode(200)
+  @HttpCode(204)
   updateProduct(@Param('id') id: string, @Body() body: UpdateProductDto) {
     return this.appService.update(Number(id), body);
   }
 
   @Delete(':id')
-  @HttpCode(200)
+  @HttpCode(204)
   deleteProduct(@Param('id') id: string) {
-    return this.appService.delete(Number(id));
+    return this.appService.deleteByID(Number(id));
   }
 }

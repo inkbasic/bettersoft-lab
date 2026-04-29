@@ -1,0 +1,21 @@
+info:
+  name: Post Category
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:3000/categories
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Accessories"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

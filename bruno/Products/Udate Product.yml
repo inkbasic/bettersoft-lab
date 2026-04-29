@@ -1,17 +1,16 @@
 info:
-  name: Post Product
+  name: Udate Product
   type: http
-  seq: 3
+  seq: 4
 
 http:
-  method: POST
-  url: http://localhost:3000/products
+  method: PUT
+  url: http://localhost:3000/products/1
   body:
     type: json
     data: |-
       {
-        "name": "Product B",
-        "category": "Accessories",
+        "name": "Product A",
         "price": 20,
         "quantity": 100
       }

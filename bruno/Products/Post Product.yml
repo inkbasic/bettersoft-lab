@@ -1,0 +1,24 @@
+info:
+  name: Post Product
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:3000/products
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Product B",
+        "category_id": 1,
+        "price": 20,
+        "quantity": 100
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

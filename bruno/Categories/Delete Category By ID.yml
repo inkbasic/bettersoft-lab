@@ -1,11 +1,11 @@
 info:
-  name: Get Product By ID
+  name: Delete Category By ID
   type: http
-  seq: 2
+  seq: 5
 
 http:
-  method: GET
-  url: http://localhost:3000/products/1
+  method: DELETE
+  url: http://localhost:3000/categories/2
   auth: inherit
 
 settings:
