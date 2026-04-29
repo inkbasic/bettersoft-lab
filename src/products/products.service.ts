@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
@@ -29,7 +29,7 @@ export class ProductsService {
       || !(data.price)
       || (typeof data.quantity !== 'number')
     ) {
-      throw new BadRequestException({ message: 'Incomplete data', error: 'Missing or invalid required fields', statusCode: 422 });
+      throw new UnprocessableEntityException({ message: 'Incomplete data', error: 'Missing or invalid required fields' });
     }
     const { category_id, ...rest } = data;
     const entity = this.productsRepo.create({
