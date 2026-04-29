@@ -1,6 +1,8 @@
 import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { unlink } from 'fs/promises';
+import { basename, join } from 'path';
 import { Product } from './entities/product.entity';
 import { Category } from '../categories/entities/category.entity';
 
@@ -57,11 +59,48 @@ export class ProductsService {
   }
 
   async deleteByID(id: number) {
+    const existing = await this.productsRepo.findOneBy({ id });
+    if (!existing) {
+      throw new NotFoundException({ message: 'Product not found' });
+    }
+    const oldFileUrl = existing.file_url;
     const result = await this.productsRepo.delete(id);
     if (!result.affected) {
       throw new NotFoundException({ message: 'Product not found' });
     }
+    await this.deleteOldUpload(oldFileUrl);
     return;
+  }
+
+  async attachFileUrl(id: number, fileUrl: string) {
+    const entity = await this.productsRepo.findOneBy({ id });
+    if (!entity) {
+      throw new NotFoundException({ message: 'Product not found' });
+    }
+    const oldFileUrl = entity.file_url;
+    entity.file_url = fileUrl;
+    const saved = await this.productsRepo.save(entity);
+    await this.deleteOldUpload(oldFileUrl, fileUrl);
+    return saved;
+  }
+
+  private async deleteOldUpload(oldFileUrl?: string, newFileUrl?: string) {
+    if (!oldFileUrl || oldFileUrl === newFileUrl) {
+      return;
+    }
+    if (!oldFileUrl.startsWith('/uploads/')) {
+      return;
+    }
+    const fileName = basename(oldFileUrl);
+    const filePath = join(process.cwd(), 'uploads', fileName);
+    try {
+      await unlink(filePath);
+    } catch (err) {
+      const error = err as { code?: string };
+      if (error.code !== 'ENOENT') {
+        throw err;
+      }
+    }
   }
 
 }

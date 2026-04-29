@@ -1,0 +1,22 @@
+info:
+  name: Upload Product File
+  type: http
+  seq: 6
+
+http:
+  method: PUT
+  url: http://localhost:3000/products/1/upload
+  body:
+    type: multipart-form
+    data:
+      - name: file
+        type: file
+        value:
+          - C:\Users\User\Downloads\แบบตอบรับนักศึกษาเข้าฝึกงาน นาย เกียรติยศ พุ่มดียิ่ง.pdf
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

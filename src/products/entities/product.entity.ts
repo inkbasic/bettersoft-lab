@@ -22,4 +22,7 @@ export class Product {
 
   @Column('int')
   "quantity": number;
+
+  @Column({ nullable: true })
+  "file_url"?: string;
 }

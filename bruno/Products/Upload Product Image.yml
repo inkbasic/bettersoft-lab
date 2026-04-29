@@ -1,0 +1,22 @@
+info:
+  name: Upload Product Image
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: http://localhost:3000/products/1/upload-image
+  body:
+    type: multipart-form
+    data:
+      - name: file
+        type: file
+        value:
+          - C:\Users\User\Pictures\S__108003331.jpg
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
