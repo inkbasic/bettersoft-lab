@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
@@ -21,5 +21,17 @@ export class UsersService {
     }
     const entity = this.usersRepo.create({ username, password_hash: passwordHash });
     return this.usersRepo.save(entity);
+  }
+
+  findAll() {
+    return this.usersRepo.find({ select: { id: true, username: true, role: true } });
+  }
+
+  async deleteById(id: number) {
+    const result = await this.usersRepo.delete(id);
+    if (!result.affected) {
+      throw new NotFoundException({ message: 'User not found' });
+    }
+    return;
   }
 }

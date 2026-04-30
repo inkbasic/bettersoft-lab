@@ -6,6 +6,9 @@ info:
 http:
   method: POST
   url: http://localhost:3000/products
+  headers:
+    - name: ""
+      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTc3NzQ1OTQxNCwiZXhwIjoxNzc3NDYzMDE0fQ.0fr7nEkiXjr6ljMOB3DOtVlNYOdh9ljmAkN0z7chVt0
   body:
     type: json
     data: |-
@@ -15,7 +18,9 @@ http:
         "price": 20,
         "quantity": 100
       }
-  auth: inherit
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTc3NzQ1OTQxNCwiZXhwIjoxNzc3NDYzMDE0fQ.0fr7nEkiXjr6ljMOB3DOtVlNYOdh9ljmAkN0z7chVt0
 
 settings:
   encodeUrl: true

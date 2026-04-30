@@ -1,0 +1,17 @@
+info:
+  name: Delete User By ID
+  type: http
+  seq: 3
+
+http:
+  method: DELETE
+  url: http://localhost:3000/users/3
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NzUxOTEzMSwiZXhwIjoxNzc3NTIyNzMxfQ.fXp9NpjWjXoZfJdgFV3fbw9npMZVpH4scidNzZGjb5k
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -10,4 +10,7 @@ export class User {
 
   @Column()
   "password_hash": string;
+
+  @Column({ default: 'user' })
+  "role": string;
 }

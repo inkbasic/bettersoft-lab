@@ -5,7 +5,7 @@ info:
 
 http:
   method: DELETE
-  url: http://localhost:3000/products/3
+  url: http://localhost:3000/products/1
   auth: inherit
 
 settings:
